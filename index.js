@@ -18,25 +18,26 @@ app.post("/sign-up",(req,res)=>{
 })
 app.post("/tweets",(req,res)=>{
     const {username,tweet}=req.body;
-    if(username.length ===0 || tweet.length ===0){
-        res.send("Todos os campos são obrigatórios!")
+    if(tweet.length===0){
+        res.status(400).send("Todos os campos são obrigatórios!")
     }
-    tweets.push({username:username,tweet:tweet})
+    console.log(tweet)
+    tweets.push({username:username,tweet:tweet,avatar:users.avatar})
     res.status(201).send(tweets)
 })
 
 app.get("/tweets",(req,res)=>{
-    const send=[]
+    const send=[];
     let xx=tweets.length;
     if(xx>10){
         xx=10
     }
     for(let i=0;i<xx;i++){
      send.push({
-		username: tweets[(tweets.length - i)-1].username,
-		avatar:users.avatar ,
-	  tweet: tweets[(tweets.length - i)-1].tweet
-	})
+        username: tweets[(tweets.length - i)-1].username,
+        avatar:tweets[(tweets.length - i)-1].avatar ,
+      tweet: tweets[(tweets.length - i)-1].tweet
+    })
     }
     res.send(send)
 })
