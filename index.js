@@ -14,25 +14,23 @@ app.post("/sign-up",(req,res)=>{
    }
     users={username:username,avatar:avatar};
     res.status(201).send(users)
-    console.log("ai calica")
 })
 app.post("/tweets",(req,res)=>{
     const {username,tweet}=req.body;
     if(tweet.length===0){
         res.status(400).send("Todos os campos são obrigatórios!")
     }
-    console.log(tweet)
     tweets.push({username:username,tweet:tweet,avatar:users.avatar})
     res.status(201).send(tweets)
 })
 
 app.get("/tweets",(req,res)=>{
     const send=[];
-    let xx=tweets.length;
-    if(xx>10){
-        xx=10
+    let numTT=tweets.length;
+    if(numTT>10){
+        numTT=10
     }
-    for(let i=0;i<xx;i++){
+    for(let i=0;i<numTT;i++){
      send.push({
         username: tweets[(tweets.length - i)-1].username,
         avatar:tweets[(tweets.length - i)-1].avatar ,
@@ -52,11 +50,11 @@ let ttUser=tweets.filter(tt=>{
 })
 app.get("/tweets?page=1",(req,res)=>{
     const first=[]
-    let xx=tweets.length;
-    if(xx>10){
-        xx=10
+    let numTT=tweets.length;
+    if(numTT>10){
+        numTT=10
     }
-    for(let i=0;i<xx;i++){
+    for(let i=0;i<numTT;i++){
      first.push({
 		username: tweets[(tweets.length - i)-1].username,
 		avatar:users.avatar ,
